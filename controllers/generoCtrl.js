@@ -85,10 +85,25 @@ const consultarGeneroPorNombre = async (req = request, res = response) => {
   }
 };
 
+const eliminarGeneroPorID = async (req = request, res = response) => {
+  try {
+    const id = req.params.id;
+    const genero = await Genero.findByIdAndDelete(id);
+
+    return res.json(genero);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      msj: error,
+    });
+  }
+};
+
 module.exports = {
   crearGenero,
   consultarGeneros,
   consultarGeneroPorID,
   editarGeneroPorID,
   consultarGeneroPorNombre,
+  eliminarGeneroPorID,
 };
